@@ -8,6 +8,7 @@
     "compare-versions": "3.6.0",
     "cypress": "^6.5.0",
     "cypress-iframe": "1.0.1",
+    "mochawesome": "^6.2.2",
     "sed-lite": "0.8.2",
     "shelljs": "0.8.4"
   },

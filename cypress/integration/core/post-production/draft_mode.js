@@ -52,6 +52,7 @@ describe('Draft Mode', () => {
 
 			//Then we can try to view the drafted changes summary
 			cy.get('input[value="Add Field"]').then(($i) => {
+				//$i.first().click()
 				$i.first().click()
 
 				cy.get('div').contains("Add New Field").then(($div) => {

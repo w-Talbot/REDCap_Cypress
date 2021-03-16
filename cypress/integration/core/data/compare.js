@@ -10,7 +10,7 @@ describe('Data Comparison Tool / DDE Module', () => {
     before(() => {
         cy.set_user_type('admin')
         cy.mysql_db('projects/pristine')
-        cy.create_cdisc_project('DCT-DDE Test', "0", 'cdisc_files/core/compare.xml', pid)
+        cy.create_cdisc_project_rad('DCT-DDE Test', "0", 'cdisc_files/core/compare.xml', pid)
         cy.visit_version({page: 'UserRights/index.php', params: `pid=${pid}`}).then(() => {
             cy.add_users_to_project([user1, user2], pid)
             cy.set_double_data_entry_module(pid, true)    

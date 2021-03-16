@@ -1,4 +1,5 @@
 const pid = 21
+
 const admin = 'test_admin'
 const standard = 'test_user'
 
@@ -7,10 +8,11 @@ const standard = 'test_user'
 describe('Export Data', () => {
 
     before(() => {
+        
         // Prepare project
         cy.set_user_type('admin')
         cy.mysql_db('projects/pristine')
-        cy.create_cdisc_project('Export Test', '0', 'cdisc_files/core/export_data.xml', pid)
+        cy.create_cdisc_project_rad('Export Test', '0', 'cdisc_files/core/export_data.xml', pid)
         cy.add_users_to_project([standard], pid)
         cy.visit_version({page: 'UserRights/index.php', params: `pid=${pid}`}).then(() => {
             cy.get(`a.userLinkInTable[userid="${standard}"]`).should('be.visible').click().then(() =>{
@@ -18,6 +20,11 @@ describe('Export Data', () => {
                 cy.get('input[name="design"]').check()
                 cy.get('input[name="user_rights"]').check()
                 cy.get('input[name="data_export_tool"][value="1"]').check()
+
+                //added full user priveleges 
+                cy.get('[style="padding-top:2px;"] > :nth-child(4)').click()
+
+
                 cy.get('.ui-button').contains(/add user|save changes/i).click()
             })
         })
@@ -25,10 +32,14 @@ describe('Export Data', () => {
         // Mark records' forms as survey complete
         cy.visit_version({page: 'DataEntry/record_home.php', params: `pid=${pid}&arm=1&id=1`})
         cy.get('div#repeating_forms_table_parent').find('td.data').first().find('a').click()
-        cy.get('#submit-btn-savecompresp').click({force: true})
+       // cy.get('#submit-btn-savecompresp').click({force: true}) //not sure what this was intended to click
+        cy.get('#submit-btn-saverecord').click({force: true}) //possibly savecontinue
+
         cy.visit_version({page: 'DataEntry/record_home.php', params: `pid=${pid}&arm=1&id=2`})
         cy.get('div#repeating_forms_table_parent').find('td.data').first().find('a').click()
-        cy.get('#submit-btn-savecompresp').click({force: true})
+      //cy.get('#submit-btn-savecompresp').click({force: true}) //not sure what this was intended to click
+        cy.get('#submit-btn-saverecord').click({force: true}) //possibly savecontinue
+
     })
 
     after(() => {

@@ -396,7 +396,7 @@ Cypress.Commands.add('create_cdisc_project', (project_name, project_type, cdisc_
     cy.visit_base({url: 'index.php?action=create'})
     cy.get('input#app_title').type(project_name)
     cy.get('select#purpose').select(project_type)
-    cy.get('input#project_template_radio2').click()
+    cy.get('input#project_template_radio2').click() 
     cy.upload_file(cdisc_file, 'xml', 'input[name="odm"]')
     cy.get('button').contains('Create Project').click().then(() => {
         let pid = null;
@@ -405,6 +405,30 @@ Cypress.Commands.add('create_cdisc_project', (project_name, project_type, cdisc_
         })
     })
 })
+
+
+
+
+Cypress.Commands.add('create_cdisc_project_rad', (project_name, project_type, cdisc_file, project_id) => {
+    //Set the Desired Project ID
+    const desired_pid = 'MAGIC_AUTO_NUMBER/' + project_id;
+    cy.mysql_db('set_auto_increment_value', desired_pid)
+
+    //Run through the steps to import the project via CDISC ODM
+    cy.visit_base({url: 'index.php?action=create'})
+    cy.get('input#app_title').type(project_name)
+    cy.get('select#purpose').select(project_type)
+    cy.get(':nth-child(2) > [name="project_template_radio"]').click()
+    cy.upload_file(cdisc_file, 'xml', 'input[name="odm"]')
+    cy.get('button').contains('Create Project').click().then(() => {
+        let pid = null;
+        cy.url().should((url) => { 
+            return url
+        })
+    })
+})
+
+
 
 Cypress.Commands.add('add_api_user_to_project', (username, pid) => {
     cy.visit_version({ page: 'UserRights/index.php', params: 'pid=' + pid}).then(() => {

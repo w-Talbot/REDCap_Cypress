@@ -1,11 +1,38 @@
 describe('Data Entry through the Data Collection Instrument', () => {
-    before(() => {
+    
+
+	before(() => {
         cy.set_user_type('standard')
+		
+
+        
+			//THis creates an instrument to check the now button
+			cy.visit_version({page: 'Design/online_designer.php', params: 'pid=1'})
+			cy.get('body').should(($body) => {
+				expect($body).to.contain('Enter Draft Mode')
+			}).then(() => {
+				cy.get('input[value="Enter Draft Mode"]').click()
+				cy.get('a').contains('Demographics').click()
+                cy.get('#btn-patient_document-f').click()
+				
+                cy.get('select').contains('Text Box (Short Text, Number, Date/Time, ...)').parent().select('Text Box (Short Text, Number, Date/Time, ...)')
+				cy.get('select').contains('Datetime (D-M-Y H:M)').parent().select('Datetime (D-M-Y H:M)')
+                cy.get('#field_label').type('Now Button Check')
+                cy.get('#field_name').type('now_button')
+						cy.get('button').contains('Save').click()
+			})
+			
+            cy.get('.jqbutton').click()
+            cy.get('.ui-dialog-buttonset > :nth-child(2)').click()
+            cy.get('.ui-dialog-buttonset > .ui-button').click()
     })
 
 	describe('Record Status Dashboard', () => {
         before(() => {
+
             cy.visit_version({page: 'DataEntry/record_status_dashboard.php', params: "pid=1"})
+			
+
         })
 
 		it('Should display a listing of all existing records', () => {
@@ -40,9 +67,11 @@ describe('Data Entry through the Data Collection Instrument', () => {
             })
 		})
 
-		it('Should have the ability to enter data for core field types', () => {    
+		it('Should have the ability to enter data for core field types', () => {  
+		
             cy.get('table#event_grid_table tbody td a').first().click()       
             cy.select_text_by_label('Date subject signed consent').type('01/01/2019')
+            cy.get('#now_button-tr > .data > .jqbuttonsm').click()
             cy.select_text_by_label('First Name').type('Rosie')
             cy.select_text_by_label('Last Name').type('Riveter')
             cy.select_textarea_by_label('Street, City, State, ZIP').type("555 Fake Address\nBeverly Hills, CA 90210")
@@ -73,21 +102,35 @@ describe('Data Entry through the Data Collection Instrument', () => {
 
 		describe('Date / Time Fields', () => {
 			it('Should display a date picker widget on a date field', () => {
-                cy.get('img.ui-datepicker-trigger').click({multiple:true})
+               
+                cy.get('#date_enrolled-tr > .data > .ui-datepicker-trigger').click({multiple:true})
+                cy.wait(1000)
 			})
 
 			it('Should display a Today button', () => {
 			    cy.get('button').should(($btn) => {
 			        expect($btn).to.contain('Today')
 			    })
-
-                cy.get('button').contains('Save & Exit Form').click()
-
-                cy.get('body').should(($body) => {
-                    expect($body).to.contain('Study ID 1 successfully edited')
-                })
 			})
+
+			it('Should display a Now button', () => {
+			    cy.get('button').should(($btn) => {
+			        expect($btn).to.contain('Now')
+    
+			    })
+
+            cy.get('button').contains('Save & Exit Form').click()
+            cy.get('body').should(($body) => {
+                expect($body).to.contain('Study ID 1 successfully edited')
+                     })
+			})
+
 		})
+
+
+      
+
+
 	})
 
 	describe('Saving Data', () => {
@@ -199,5 +242,22 @@ describe('Data Entry through the Data Collection Instrument', () => {
             cy.visit_version({page: 'DataEntry/record_home.php', params: "pid=1&arm=1&id=1"})
             cy.get('ul li').contains('Delete record (all forms)')
         })
+
+
+        it('Should have the ability to rename a record', () => {
+            cy.get('#record-home-link').click()
+            cy.get('#recordActionDropdownTrigger > .fas').click()
+            cy.get('#ui-id-5').click()
+            cy.get('#new-record-name').type('Rename Record')
+            cy.get('.ui-dialog-buttonset > :nth-child(2)').click()
+        })
+
 	})
+
+   
+
+
+
+
 })
+
