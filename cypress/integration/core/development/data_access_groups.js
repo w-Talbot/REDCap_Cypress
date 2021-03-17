@@ -50,11 +50,8 @@ describe('Data Access Groups (DAGs)', () => {
 				cy.add_users_to_data_access_groups(['Group 1', 'Group 2'], ['test_user', 'test_user2'], '13')
 			})
 
-		    it('Should have the ability to restrict a user to the data they entered', () => {
-				
-		    })
-
-		    it('Should have the ability to restrict a user to the data of the same Data Access Group', () => {
+	
+		    it('Should have the ability to restrict a user to data they entered / data of the same Data Access Group', () => {
 				cy.set_user_type('standard')  
 				cy.visit_version({page: 'index.php', params: 'pid=13'})
 				cy.get('a').contains("Add / Edit Records").click()
@@ -92,4 +89,25 @@ describe('Data Access Groups (DAGs)', () => {
 		    })
 
 	    })
+
+		describe('Assign Records', () => {
+
+			it('The system shall provide the ability to assign records to a data access group from the Record Home page or from the form dropdown list when creating a new record', () => {
+				cy.get('.odd > [style="font-size:12px;"] > a').click()
+				cy.get('[style="vertical-align:middle;color:#000066;margin-right:6px;margin-left:3px;"]').click()
+				cy.get('#ui-id-5 > span').click();
+				cy.wait(1000)
+				cy.get('select').contains('Group 2').parent().select('Group 2')
+				cy.get('.ui-dialog-buttonset > :nth-child(2)').click()
+
+				cy.get('#record_display_name').should(($b) => {
+					expect($b).to.contain('Group 2')
+					
+				})
+
+			})
+
+				
+		})
+
 	}) 
