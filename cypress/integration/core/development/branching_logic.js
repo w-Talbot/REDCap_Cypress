@@ -59,7 +59,7 @@ describe('Branching Logic', () => {
 
     describe('Survey Interface', () => {
         before(() => {
-            cy.get('a').contains('Survey Distribution Tools').click()
+            cy.get('a').contains('Manage Survey Participants').click()
             cy.get('button').contains('Leave without saving changes').click()
             cy.get('input#longurl').invoke('attr', 'value').then(($val) =>{
                 cy.visit($val)
