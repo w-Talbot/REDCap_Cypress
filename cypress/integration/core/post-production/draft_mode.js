@@ -58,7 +58,10 @@ describe('Draft Mode', () => {
 				cy.get('div').contains("Add New Field").then(($div) => {
 					cy.get('div').contains('Field Type:').next().select('text')
 					cy.get('input#field_name').type('test_field')					
-					cy.get('input#field_label_rich_text_checkbox').click()
+				
+				
+					// cy.get('input#field_label_rich_text_checkbox').click()
+				
 					cy.get('textarea#field_label').type('Test Field')
 					cy.get('button').contains('Save').click()
 				})
@@ -220,13 +223,17 @@ describe('Draft Mode', () => {
 				cy.save_field()
 
 
-				cy.get('input[value="Submit Changes for Review"]').should(($i) => {
-					$i.first().click()
-				})
+				// cy.get('input[value="Submit Changes for Review"]').should(($i) => {
+				// 	$i.first().click()
+				// })
+
+				cy.get('input[value="Submit Changes for Review"]').click()
+				// cy.get('[style="text-align: center;"] > input').click()
+				//cy.get('button').contains('Save Changes').click()
 
 				//Submit for Appproval
 				cy.get('button').contains('Submit').click()
-
+				
 				//Visit modification panel as admin
 				cy.set_user_type('admin')
 				cy.visit_version({page: 'Design/project_modifications.php', params: "pid=2"})
@@ -250,43 +257,21 @@ describe('Draft Mode', () => {
 				cy.get('button').contains('Reject Changes').click()
 				cy.get('div.ui-dialog-buttonset button').contains('Reject Changes').click()
 				cy.get('body').should(($body) => {
-					expect($body).to.contain('Project Changes Rejected / User Notified')
+					expect($body).to.contain('have been REJECTED')
 				})
 			})
 
 			it('Should have the ability for Administrators to Reset and Delete drafted changes if necessary', () => {
 				//Click Remove All Changes button and verify notice
-				cy.get('button').contains('Remove All Drafted Changes').click()
-				cy.get('div.ui-dialog-buttonset button').contains('Remove All Drafted Changes').click()
-				cy.get('body').should(($body) => {
-					expect($body).to.contain('changes were NOT committed to the project but were removed')
-				})
+			
+				cy.get('button').contains('Reset & Delete All Drafted Changes').click()
+				cy.get('.ui-dialog-buttonset > :nth-child(2)').click()
+				
+				cy.get('body').should('contain.text','have been DELETED')
+			
 			})	
 
-			describe('Notifications', () => {
-
-				it('Should allow an Administrator to send a confirmation email (templated, but editable) to the requestor', () => {
-					//Click Remove All Changes button and verify notice
-					cy.get('button').contains('Compose confirmation email').click()
-
-					//Check for the telltale signs of an email template
-					cy.get('div.ui-dialog').should(($div) => {
-						expect($div).to.contain('Compose confirmation email')
-						expect($div).to.contain('To:')
-						expect($div).to.contain('From:')
-						expect($div).to.contain('Subject:')
-						expect($div).to.contain('Send Email')						
-					})
-
-					//Send the email
-					cy.get('button.ui-button').contains('Send Email').click()
-
-					//Check to see that REDCap indicates the email was sent
-					cy.get('body').should(($body) => {
-						expect($body).to.contain('Your email was successfully sent')
-					})
-				})	
-			})
+			
 		})
 
 		describe('Data Dictionary', () => {
@@ -362,4 +347,6 @@ describe('Draft Mode', () => {
 		    })
 		})
 	})	
+
+
 })

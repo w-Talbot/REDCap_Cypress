@@ -167,13 +167,14 @@ describe('Design forms Using Data Dictionary and Online Designer', () => {
               
                 cy.get('[style="margin:5px 0;font-size:11px;color: #808080;"] > .btn').click()
               
-                    //add Default value for Field annotation
+                //add Default value for Field annotation
                 cy.get(':nth-child(4) > [style="text-align:center;background-color:#f5f5f5;color:#912B2B;padding:7px 15px 7px 12px;font-weight:bold;border:1px solid #ccc;border-bottom:0;border-right:0;"] > .btn').click()
-  //add read only action tag
+                //add read only action tag
                 cy.get(':nth-child(20) > [style="text-align:center;background-color:#f5f5f5;color:#912B2B;padding:7px 15px 7px 12px;font-weight:bold;border:1px solid #ccc;border-bottom:0;border-right:0;"] > .btn').click()
                 
         
                 cy.get('[aria-describedby="action_tag_explain_popup"] > .ui-dialog-buttonpane > .ui-dialog-buttonset > .ui-button').click()    
+               
                 //checks action tags exists
                 cy.get('#field_annotation').should('have.value', '@READONLY @DEFAULT')
 
@@ -213,18 +214,53 @@ describe('Design forms Using Data Dictionary and Online Designer', () => {
                         cy.get('[style="font-weight: bold; color: rgb(51, 51, 51);"]').click()
                  })
 
-                 it('The system shall support the injection of previously collected data into text on a data collection form or survey, thus providing greater precision and control over question wording (piping)', () => {
-            
-               	            
-                })
-                it('The system shall support the injection of system defined variables that contain system level information rather than study field data:', () => {
-                
-                                   
-                })
+                 
 
             it('The system shall support the ability to add, edit, copy, move and delete data collection fields', () => {
             
-               	            
+                //ADD has been proven by the first test
+
+                //EDIT has been proven by injection of prev. collected data
+
+
+                //MOVE ......doesnt work for now
+
+                //open button
+                cy.get('[onclick="moveField(\'test_inst\',\'\')"] > img').click()
+                //select
+                // cy.get("#move_after_field").should( "have.value", 'last_name "Last Name"' ).select( 'last_name "Last Name"')
+                cy.get("#move_after_field").contains('last_name "Last Name"').parent().select( 'last_name "Last Name"')
+                // cy.get('select').contains('last_name "Last Name"').parent().select( 'last_name "Last Name"')
+                //close button
+                 cy.get('.ui-dialog-buttonset > :nth-child(2)').click()
+                 
+               	  
+                //DELETE
+                cy.get('#label-patient_document').should(($val) => {
+                    expect($val).to.contain('Upload the patient\'s consent form')
+                        
+                    }) 
+                cy.get('[onclick="deleteField(\'patient_document\',0);"] > img').click()
+                cy.get('.ui-dialog-buttonset > :nth-child(2)').click()
+
+                cy.contains('Upload the patient\'s consent form').should('not.exist')
+                        
+                   
+            })
+            it('The system shall support the injection of previously collected data into text on a data collection form or survey, thus providing greater precision and control over question wording (piping)', () => {
+            
+                // cy.get('[onclick="openAddQuesForm(\'first_name\',\'text\',0,\'0\');"] > img').click() 
+                // cy.get('#field_annotation').type('@DEFAULT=\'[test_inst]\'')  
+                // cy.get('[style="font-weight: bold; color: rgb(51, 51, 51);"]').click()
+
+
+                // cy.get('.jqbutton').click()
+                // cy.get('.ui-dialog-buttonset > :nth-child(2)').click()
+
+            })
+            it('The system shall support the injection of system defined variables that contain system level information rather than study field data:', () => {
+            
+                               
             })
   
          
