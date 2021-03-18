@@ -223,18 +223,13 @@ describe('Design forms Using Data Dictionary and Online Designer', () => {
                 //EDIT has been proven by injection of prev. collected data
 
 
-                //MOVE ......doesnt work for now
+                //MOVE 
+                cy.get('#design-test_inst > tbody > :nth-child(1) > .frmedit')
+                .trigger('mousedown', { which: 1, pageX: 600, pageY: 100 })
+                .trigger('mousemove', { which: 1, pageX: 600, pageY: 600 })
+                .trigger('mouseup')
 
-                //open button
-                cy.get('[onclick="moveField(\'test_inst\',\'\')"] > img').click()
-                //select
-                // cy.get("#move_after_field").should( "have.value", 'last_name "Last Name"' ).select( 'last_name "Last Name"')
-                cy.get("#move_after_field").contains('last_name "Last Name"').parent().select( 'last_name "Last Name"')
-                // cy.get('select').contains('last_name "Last Name"').parent().select( 'last_name "Last Name"')
-                //close button
-                 cy.get('.ui-dialog-buttonset > :nth-child(2)').click()
-                 
-               	  
+                
                 //DELETE
                 cy.get('#label-patient_document').should(($val) => {
                     expect($val).to.contain('Upload the patient\'s consent form')
@@ -248,19 +243,50 @@ describe('Design forms Using Data Dictionary and Online Designer', () => {
                    
             })
             it('The system shall support the injection of previously collected data into text on a data collection form or survey, thus providing greater precision and control over question wording (piping)', () => {
-            
-                // cy.get('[onclick="openAddQuesForm(\'first_name\',\'text\',0,\'0\');"] > img').click() 
-                // cy.get('#field_annotation').type('@DEFAULT=\'[test_inst]\'')  
-                // cy.get('[style="font-weight: bold; color: rgb(51, 51, 51);"]').click()
-
-
-                // cy.get('.jqbutton').click()
-                // cy.get('.ui-dialog-buttonset > :nth-child(2)').click()
+                
+                cy.get('.float-left > .btn').click()
+                cy.get('#formlabel-baseline_data').click()
+                cy.get('[onclick="openAddQuesForm(\'alb_b\',\'text\',0,\'0\');"] > img').click()
+                cy.get('#field_annotation').type('@DEFAULT=\'[first_name]\'')
+                cy.get('[style="font-weight: bold; color: rgb(51, 51, 51);"]').click()
 
             })
             it('The system shall support the injection of system defined variables that contain system level information rather than study field data:', () => {
-            
-                               
+                cy.get('[onclick="openAddQuesForm(\'prealb_b\',\'text\',0,\'0\');"] > img').click()
+                cy.get('#field_annotation').type('@DEFAULT=\'[user-name]\'') 
+                cy.get('button').contains('Save').click()     
+                
+                
+
+                cy.get('[onclick="openAddQuesForm(\'creat_b\',\'text\',0,\'0\');"] > img').click()
+                cy.get('#field_annotation').type('@DEFAULT=\'[user-dag-name]\'') 
+                cy.get('button').contains('Save').click()     
+                
+
+
+                cy.get('[onclick="openAddQuesForm(\'npcr_b\',\'text\',0,\'0\');"] > img').click()
+                cy.get('#field_annotation').type('@DEFAULT=\'[user-dag-id]\'') 
+                cy.get('button').contains('Save').click()     
+                
+
+                cy.get('[onclick="openAddQuesForm(\'chol_b\',\'text\',0,\'0\');"] > img').click()
+                cy.get('#field_annotation').type('@DEFAULT=\'[user-dag-label]\'') 
+                cy.get('button').contains('Save').click()     
+                
+
+                cy.get('[onclick="openAddQuesForm(\'transferrin_b\',\'text\',0,\'0\');"] > img').click()
+                cy.get('#field_annotation').type('@DEFAULT=\'[record-name]\'') 
+                cy.get('button').contains('Save').click()     
+                
+
+                cy.get('[onclick="openAddQuesForm(\kt_v_b\',\'text\',0,\'0\');"] > img').click()
+                cy.get('#field_annotation').type('@DEFAULT=\'[record-dag-name]\'') 
+                cy.get('button').contains('Save').click()     
+                
+                cy.get('[onclick="openAddQuesForm(\'sga_b\',\'text\',0,\'0\');"] > img').click()
+                cy.get('#field_annotation').type('@DEFAULT=\'[record-dag-id]\'') 
+                cy.get('button').contains('Save').click()
+
             })
   
          
