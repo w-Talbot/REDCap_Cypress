@@ -64,6 +64,8 @@ describe('Extensions Check', () => {
                     cy.get('[field="test-text"] > .external-modules-input-td > .external-modules-input-element').type('test')
                     cy.get('[field="text-area"] > .external-modules-input-td > textarea').type('testing')
                     cy.get('button').contains('Save').click()  
+
+                    
                 })
         })
 
