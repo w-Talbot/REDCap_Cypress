@@ -9,6 +9,47 @@ describe('System Security Settings', () => {
 		cy.visit_version({page: 'ControlCenter/general_settings.php'})
 	})
 
+
+	describe('Security & Authentication Settings', () => {
+		it('Should have Table-based Authentication Settings', () => {
+			cy.visit_version({page: 'ControlCenter/security_settings.php'})
+			cy.get('#control_center_window').should(($a) => {
+				expect($a).to.contain('text','Table-based Authentication Settings')
+			})
+		})
+	
+	
+			it('Should have Auto logout time', () => {
+				cy.visit_version({page: 'ControlCenter/security_settings.php'})
+				cy.get('#control_center_window').should(($a) => {
+					expect($a).to.contain('text','Auto logout time')
+				})
+			})
+				it('Should have Number of failed login attempts before user is locked out', () => {
+					cy.visit_version({page: 'ControlCenter/security_settings.php'})
+					cy.get('#control_center_window').should(($a) => {
+						expect($a).to.contain('text','Number of failed login attempts before user is locked out')
+					})
+				})
+					it('Should have amount of time user will be locked out after having failed login attempts', () => {
+						cy.visit_version({page: 'ControlCenter/security_settings.php'})
+						cy.get('#control_center_window').should(($a) => {
+							expect($a).to.contain('text','Amount of time user will be locked out after having failed login attempts')
+						})
+					})
+						it('Should have Force users to change their password after a specified number of days', () => {
+							cy.visit_version({page: 'ControlCenter/security_settings.php'})
+							cy.get('#control_center_window').should(($a) => {
+								expect($a).to.contain('text','Force users to change their password after a specified number of days')
+							})
+						})
+	
+	
+					})
+
+
+
+
 	it('Should initially display system status as "SYSTEM ONLINE"', () => {
 		cy.get('select').contains('SYSTEM ONLINE').should(($a) => {
 			expect($a).to.contain('SYSTEM ONLINE')
@@ -134,6 +175,11 @@ describe('Project Security Settings', () => {
 			cy.get('div').should(($div) => {
 				expect($div).to.contain('Your changes have been saved!')
 			})
+
+
+
+
+
 		})
 	})
 })
