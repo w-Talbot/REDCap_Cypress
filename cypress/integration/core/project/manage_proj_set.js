@@ -121,7 +121,7 @@ describe('Extensions Check', () => {
             })
          it('The system shall require administrators to delete events for longitudinal projects while in production', () => {
                 //code here
-    })
+                })
          
 
     

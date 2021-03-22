@@ -47,9 +47,6 @@ describe('System Security Settings', () => {
 	
 					})
 
-
-
-
 	it('Should initially display system status as "SYSTEM ONLINE"', () => {
 		cy.get('select').contains('SYSTEM ONLINE').should(($a) => {
 			expect($a).to.contain('SYSTEM ONLINE')
