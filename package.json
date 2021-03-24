@@ -20,5 +20,8 @@
     "url": "https://github.com/aldefouw/redcap_cypress.git"
   },
   "author": "Adam De Fouw",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "cypress-commands": "^1.1.0"
+  }
 }

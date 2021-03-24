@@ -43,6 +43,13 @@ describe('System Security Settings', () => {
 								expect($a).to.contain('text','Force users to change their password after a specified number of days')
 							})
 						})
+						it('Should automatically suspended after a set period of inactivity', () => {
+							cy.visit_version({page: 'ControlCenter/security_settings.php'})
+							cy.get(':nth-child(16) > :nth-child(5) > a').click()
+							cy.get('#control_center_window').should(($a) => {
+								expect($a).to.contain('text','Auto-suspend users after period of inactivity')
+							})
+						})
 	
 	
 					})
