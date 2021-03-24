@@ -81,19 +81,19 @@ describe('e-Consent Framework', () => {
 
         
 //         // cy.get('[onclick="surveyOpen($(\'#longurl\').val(),0);"]').click()
-        cy.get('.embed-survey-btn').click()
+        // cy.get('.embed-survey-btn').click()
 
-        cy.get('#embedurl').then(($temp)=>{
-            const txt = $temp.text()
-        //     const txt = $temp
+        // cy.get('#embedurl').then(($temp)=>{
+        //     const txt = $temp.text()
+        // //     const txt = $temp
 
 
-            cy.log('Log Here: ')
-            cy.log(`${txt}`)
-            cy.log(txt)
-            cy.pause()
-            cy.visit(txt)
-        })
+        //     cy.log('Log Here: ')
+        //     cy.log(`${txt}`)
+        //     cy.log(txt)
+        //     cy.pause()
+        //     cy.visit(txt)
+        // })
 
     
 // // cy.pause()

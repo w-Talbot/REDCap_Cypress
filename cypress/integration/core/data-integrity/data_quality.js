@@ -83,7 +83,7 @@ describe('Data Quality', () => {
                         cy.get(':nth-child(11) > a').click()
 
 
-        cy.get('textarea#input_rulename_id_0').type("number rule")
+        cy.get('textarea#input_rulename_id_0').type("number rule to delete")
         cy.get('textarea#input_rulelogic_id_0').type('[age] > 1')
         cy.get('button').contains("Add").click()
 
@@ -102,15 +102,21 @@ describe('Data Quality', () => {
         //add exclusion
         cy.get('.fc > a').click()
         cy.wait(500)
+        cy.get('button').contains('Close').click()
+        
+       
+    
+            cy.get('[style="float:right;"] > a').click()
 
-        //remove exclusion
-        cy.get('.fc > a').click()
-        cy.wait(500)
+            cy.get('#results_table_2').should(($val) => {
+                expect($val).to.contain('remove exclusion')
+                    
+                })
       
-        cy.get('.ui-dialog-buttonset > .ui-button').click()
+                cy.get('button').contains('Close').click()
 
 
-        //needs a validation Check/need to solve this..........
+        
 
 
 
@@ -120,32 +126,91 @@ describe('Data Quality', () => {
     it('Should have the ability to clear discrepancies from executed rules', () => {
             
         cy.get('#clearBtn').click()
-        // expect($div).not.to.contain('number rule') //needs a validation Check/need to solve this..........
+        cy.get('#ruleexe_2').should(($val) => {
+            //original state after discrepancies are cleared
+            expect($val).to.contain('Execute')
+                
+            })
+        
     })
 
 	it('Should have the ability to limit the viewing of a rule to a specific Data Access Group', () => {
+        
+
+        cy.visit_version({page: 'DataAccessGroups/index.php', params: 'pid=13'})
+        cy.get('#new_group').type('group 1')
+        cy.get('#new_group_button').click()
+        cy.wait(1000)
+        
+        cy.get('#new_group').type('group 2')
+        cy.get('#new_group_button').click()
+        cy.wait(1000)
+
+        cy.get('#group_users').select('test_user (Test User)')
+        cy.wait(1000)
+        cy.get('#groups').select('group 1')
+        cy.wait(1000)
+        cy.get('#user_group_button').click()
+
+        cy.visit_version({page: 'DataQuality/index.php', params: 'pid=13'})
+
+        cy.get('textarea#input_rulename_id_0').type("DAG rule")
+        cy.get('textarea#input_rulelogic_id_0').type('[user-dag-name] = \'group 1\'')
+        cy.get('button').contains("Add").click()
+        cy.get('#center').should(($val) => {
+            expect($val).to.contain('group 1')
+                
+            })
+
+
+           
             
+
     })
 
 	it('Should have the ability to limit a rule viewing that references a Field for which users do not have User Rights', () => {
-            
+        
+        cy.get('#rulelogic_3').click()
+        cy.get('#input_rulelogic_id_3').type('{selectall}').type('[user-dag-name] = \'group 2\'')
+        cy.get('#rulelogic_3 > button').click()
+        cy.get('#center').should(($val) => {
+            expect($val).to.contain('group 2')
+                
+            })
+      
     })
 
 	it('Should have the ability to delete a user defined rule', () => {
+      
+        cy.get('#center').should(($val) => {
+            expect($val).to.contain('number rule to delete')
+                
+            })
         cy.get('#ruledel_2 > a > img').click() 
         
-        //needs a validation Check....................
+        cy.get('#center').should(($val) => {
+            expect($val).to.not.contain('number rule to delete')
+                
+            })
+       
     })
 
 	it('Should have the ability to validate a unique event name used in custom rules for longitudinal projects', () => {
-            
+            //this is already confirmed in ability the 'to create a data quality rule ' test by creating a unique event name
+            cy.get('#center').should(($val) => {
+                expect($val).to.contain('new rule')
+                    
+                })
     })
 
 	it('Should have the ability to execute a custom data quality rule in real time', () => {
         cy.get('#rulerte_1 > img').click()
         cy.get('#rulerte_newvalue_1').click()
         cy.get('#rulerte_1 > button').click()
-        // cy.get('#rulerte_1 > button').contains('img') //needs a validation Check/figure out test....................
+        cy.get('.row').should(($val) => {
+            expect($val).to.contain('Execute in real time on data entry form')
+                
+            })
     })
 
 })
