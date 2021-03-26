@@ -1,7 +1,19 @@
 describe('Data Entry through the Survey Feature', () => {
 
 	before(() => {
-		cy.set_user_type('standard')
+		cy.mysql_db("projects/pristine")
+		cy.set_user_type('admin')
+		
+		cy.visit_version({page: 'ProjectSetup/index.php', params: 'pid=1'})
+        cy.get('#setupEnableSurveysBtn').click()
+        cy.visit_version({page: 'Design/online_designer.php', params: 'pid=1'})
+        cy.get(':nth-child(1) > :nth-child(5) > .fc > .jqbuttonsm').click({force:true})
+        cy.get(':nth-child(37) > [valign="middle"] > .btn').click()
+        cy.visit_version({page: 'Surveys/invite_participants.php', params: 'pid=1'})
+
+        //opens survey
+        // cy.get('#longurl').invoke('val').then((val1) => {cy.visit(val1)});
+
 	})
 
 	it('Should have the ability to directly enter data through a survey', () => {
@@ -13,6 +25,10 @@ describe('Data Entry through the Survey Feature', () => {
 	})
 
 	describe('User Interface - Survey Distribution', () => {
+
+		before(() => {
+			cy.visit_version({page: 'Surveys/invite_participants.php', params: 'pid=1'})
+		})
 
 		it('Should have the ability to automatically create a participant list using a designated email field when a survey is not in the first instrument position', () => {
 		    
