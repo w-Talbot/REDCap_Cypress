@@ -70,7 +70,14 @@ describe('Data Collection and Storage', () => {
 		})
 
 		it('Should have the ability to require the event name in the csv file when importing data to a longitudinal study', () => {
-           
+		// 	cy.upload_file('import_files/classic_db_import_rows.csv', 'csv', 'input[name="uploadedfile"]')
+		// 	cy.wait(1000)
+
+		// 	cy.get('input').contains('Upload File').click().then(() => {
+			
+		// 		})
+
+        //    cy.pause()
 	    })
 
 	})	

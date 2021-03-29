@@ -88,7 +88,7 @@ describe('Data Entry through the Survey Feature', () => {
         cy.visit_version({page: 'Surveys/invite_participants.php', params: 'pid=1'})
 
     //     //opens survey
-    //     // cy.get('#longurl').invoke('val').then((val1) => {cy.visit(val1)});
+        // cy.get('#longurl').invoke('val').then((val1) => {cy.visit(val1)});
         })
 
     //     it('Should have the ability to automatically create a participant list using a designated email field when a survey is not in the first instrument position', () => {
@@ -120,7 +120,7 @@ describe('Data Entry through the Survey Feature', () => {
 
 		})
 
-	// 	it('Should have the ability to creation of a participant list manually where each survey is assigned a unique survey link when the survey is in the first instrument position', () => {
+	// 	it('Should have the ability to create a participant list manually where each survey is assigned a unique survey link when the survey is in the first instrument position', () => {
 		    
 	// 	})
 
