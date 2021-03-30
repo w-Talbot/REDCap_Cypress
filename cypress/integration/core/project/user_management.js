@@ -119,24 +119,6 @@ describe('Add / Manage Users', () => {
 			})
 		}) 
 
-		// describe('Security & Authentication', () => { 
-
-		// 	it('Should have the ability to lock out users after a certain number of failed login attempts', () => {
-		// 		cy.visit_version({page: 'ControlCenter/security_settings.php'})
-		// 		cy.get('form#form').should(($f) => {
-		// 			expect($f).to.contain('Number of failed login attempts before user is locked out')
-		// 		})
-		// 	})
-
-		// 	it('Should have the ability to specify the amount of time a user will be locked out after failed login attempts', () => {
-		// 		cy.visit_version({page: 'ControlCenter/security_settings.php'})
-		// 		cy.get('tr#logout_fail_window-tr').within(($tr) => {
-		// 			cy.get('input').type('25')
-		// 		})
-		// 		cy.get('input[value="Save Changes"]').click()
-		// 	})
-		// })
-
         describe('Assign User Rights', () => {
 
             before(() => {

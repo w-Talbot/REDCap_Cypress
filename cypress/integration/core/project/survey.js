@@ -20,11 +20,6 @@ describe('Data Entry through the Survey Feature', () => {
             cy.get('.jqbutton').click()
             cy.get('.ui-dialog-buttonset > :nth-child(2)').click()
             cy.wait(1000)
-            // cy.get('.ui-dialog-buttonset > .ui-button').click()
-
-   
-
-
 
         //Add Record
         cy.visit_version({page: 'DataEntry/record_home.php', params: 'pid=1'})
@@ -71,7 +66,6 @@ describe('Data Entry through the Survey Feature', () => {
 				expect($body).to.contain('Disable')
                 })
 			})
-           
 
         })
 
@@ -83,17 +77,11 @@ describe('Data Entry through the Survey Feature', () => {
         cy.visit_version({page: 'Design/online_designer.php', params: 'pid=1'})
         cy.get(':nth-child(1) > :nth-child(5) > .fc > .jqbuttonsm').click({force:true})
         cy.get(':nth-child(37) > [valign="middle"] > .btn').click()
-        // cy.pause()
         cy.wait(1000)
         cy.visit_version({page: 'Surveys/invite_participants.php', params: 'pid=1'})
-
-    //     //opens survey
-        // cy.get('#longurl').invoke('val').then((val1) => {cy.visit(val1)});
         })
 
-    //     it('Should have the ability to automatically create a participant list using a designated email field when a survey is not in the first instrument position', () => {
-		   
-		// })
+    
 
 		it('Should have the ability for a survey to be generated from within a participant record using Log Out + Open Survey', () => {
 			cy.get('button').should(($body) => {
@@ -119,11 +107,6 @@ describe('Data Entry through the Survey Feature', () => {
 			})
 
 		})
-
-	// 	it('Should have the ability to create a participant list manually where each survey is assigned a unique survey link when the survey is in the first instrument position', () => {
-		    
-	// 	})
-
 
     })
 
@@ -167,9 +150,6 @@ describe('Data Entry through the Survey Feature', () => {
             cy.get('select#record').should(($val) => {
                 expect($val).to.contain('2')
             }) 
-		
-
-
 		})
 
 		it('Should have the ability to submit survey responses to be changed by a user who has edit survey responses rights', () => {
@@ -178,8 +158,6 @@ describe('Data Entry through the Survey Feature', () => {
             cy.get('#form_response_header').should(($val) => {
                 expect($val).to.contain('Survey response is editable')
             }) 
-
-            
 		})
 
 		it('Should have the ability to support Incomplete surveys status', () => {
@@ -200,19 +178,16 @@ describe('Data Entry through the Survey Feature', () => {
 		it('Should have the ability to support Partial Survey Response status', () => {
 		    cy.visit_version({page: 'DataEntry/record_home.php', params: 'pid=1'})
             cy.get('.data > button').click()
-
-           
             cy.get(':nth-child(1) > .nowrap > a > img').click()
             cy.get('#first_name-tr > .data > .x-form-text').type('firstly')
             cy.get('#formSaveTip > #submit-btn-saverecord').click()
-            cy.get('.ui-dialog-buttonset > :nth-child(2)').click()
+            cy.get('.ui-dialog-buttonset > :nth-child(2)').click({force:true})
             cy.get('#center').should(($val) => {
                 expect($val).to.contain('Partial Responses')
             }) 
 		})
 
 		it('Should have the ability to support Completed Survey Response status', () => {
-		    // cy.visit_version({page: 'DataEntry/record_home.php', params: 'pid=1'})
             cy.get('#center').should(($val) => {
                 expect($val).to.contain('Complete Responses')
             }) 
@@ -221,27 +196,64 @@ describe('Data Entry through the Survey Feature', () => {
     })
 
     describe('User Interface - Survey Project Settings', () => {
-        before(() => {
-           
-            //Code here
+
+        it('Should have the ability to automatically create a participant list using a designated email field when a survey is not in the first instrument position', () => {
+            cy.visit_version({page: 'Surveys/invite_participants.php', params: 'pid=1'})
+            cy.get('ul > :nth-child(2) > a').click() //participant list
+            cy.get('.bDiv').find('tr').should('have.length', 4)
+        
+         })
+
+        it('Should have the ability to create a participant list manually where each survey is assigned a unique survey link when the survey is in the first instrument position', () => {
+            cy.get('#addPartsBtn').click()
+            cy.get('.ui-dialog').should(($val) => {
+                expect($val).to.contain('Add Emails to Participant List')
+            }) 
+            cy.get('#newPart').type('manualemail@test.yes')
+            cy.get('.ui-dialog-buttonset > :nth-child(2)').click()
+
+            cy.get('#center').should(($val) => {
+                expect($val).to.contain('manualemail@test.yes')
+            }) 
 
         })
+
+
         it(' The system shall support a participant list for each survey in the project', () => {
-		    //Code HEre
-        })
+		    cy.get('.bDiv').find('tr').should('have.length', 5) 
+        }) 
 
         it('The system shall support tracking responders and non-responders to surveys when using the participant list', () => {
-		    //Code HEre
+		    cy.get('#center').should(($val) => {
+                expect($val).to.contain('Responded?')
+            }) 
         })
-        it(' The system shall delete all survey-related information and functions including survey link, return codes and date/time stamp when disabling survey functionality', () => {
-		    //Code HEre
-        })
+       
         it(' The system shall allow for the saving of completed instruments as a PDF', () => {
-		    //Code HEre
-        })
-        it('The system shall support the eMailing of completed instruments to the participant.', () => {
-		    //Code HEre
+            cy.visit_version({page: 'Design/online_designer.php', params: 'pid=1'})
+            cy.get('[onclick="window.location.href=app_path_webroot+\'Surveys/edit_info.php?pid=\'+pid+\'&view=showform&page=demographics&redirectDesigner=1\';"]').click()
+          
+            cy.get('[style="width:290px;font-weight:bold;padding-bottom:5px;"]').should(($val) => {
+                expect($val).to.contain('Upon survey completion, a compact PDF copy of the survey response will be automatically stored')
+            }) 
         })
 
+        it('The system shall support the eMailing of completed instruments to the participant.', () => {
+            cy.get('#confirmation_email_enable').select('Yes')
+            cy.get('[style="background-color:#FAFAFA;border:1px solid #DDDDDD;padding:0 6px;max-width:830px;"]').should(($val) => {
+                expect($val).to.contain('Include PDF of completed survey as attachment')
+            }) 
+        
+        })
+        it(' The system shall delete all survey-related information and functions including survey link, return codes and date/time stamp when disabling survey functionality', () => {
+            cy.get('[valign="middle"] > [onclick="history.go(-1);return false;"]').click()
+            cy.visit_version({page: 'ProjectSetup/index.php', params: 'pid=1'})
+            cy.get('#setupEnableSurveysBtn').click()
+            cy.wait(1000)
+            cy.get('.ui-dialog').contains('all your surveys that you have created thus far will become hidden and will no longer be accessible')
+
+        })
     })
+
+
 })

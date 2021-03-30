@@ -1,0 +1,4 @@
+study_id,Survey Identifier,Survey Timestamp,first_name,last_name
+1,1,,John,Doe
+2,,,Jane,Doe
+3,3,06/03/2020 12:12,Jonathan,Doethan
