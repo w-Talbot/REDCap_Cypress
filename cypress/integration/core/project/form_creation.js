@@ -255,15 +255,6 @@ describe('Design forms Using Data Dictionary and Online Designer', () => {
            
             })
 
-            it('The system shall support the injection of system defined variables that contain system level information rather than study field data:', () => {
-               
-                
-                cy.get('[onclick="openAddQuesForm(\'address\',\'textarea\',0,\'0\');"] > img').click()
-                cy.get('#field_annotation').type('@DEFAULT=\'[user-name], [user-dag-name] , [user-dag-id] , [record-name], [record-dag-name] , [record-dag-id],[record-dag-label],[is-form],[form-url:instrument],[form-link:instrument:Custom Text],[is-survey],[survey-url:instrument],urvey-link:instrument:Custom Text],[survey-queue-url],[survey-queue-link:Custom Text],[survey-time-completed:instrument],[survey-date-completed:instrument],[event-name],[event-label],[previous-event-name],[previous-event-label],[next-event-name],[next-event-label],[first-event-name],[first-event-label],[last-event-name],[last-event-label],[arm-number],[arm-label],[previous-instance],[current-instance],[next-instance],[first-instance],[last-instance] \'') 
-                cy.get('button').contains('Save').click()     
-                
-           
-            })
             it('The system shall support the injection of previously collected data / system defined variables into text on a data collection (piping)', () => {
                 
 
@@ -302,9 +293,6 @@ describe('Design forms Using Data Dictionary and Online Designer', () => {
                
                 //Baseline check
                 cy.get(':nth-child(2) > .nowrap > a > img').click()
-
-                //check piping...code works / test doesnt work 
-                // cy.get('input#alb_b-tr > .data > .x-form-text').should('contain.text','4')
 
             })
             
@@ -352,13 +340,7 @@ describe('Design forms Using Data Dictionary and Online Designer', () => {
                 })
               
                 
-                // it('The system shall support the creation of new data collection instruments using the Data Dictionary', () => {
-                //     cy.get('#row_6 > :nth-child(5) > .fc > .formActions > .jqbuttonsm').click()  
-                //     // cy.get('#ui-id-4 > span').click()
-
-
-
-                //   })
+               
                   it('The system shall support the ability to copy data collection instruments and add a suffix to each variable name in the new instrument', () => {
                     cy.get('#row_6 > :nth-child(5) > .fc > .formActions > .jqbuttonsm').click()  
                     cy.get('#ui-id-2 > span').click()
@@ -369,6 +351,33 @@ describe('Design forms Using Data Dictionary and Online Designer', () => {
                     cy.get('#design-complete_study_v2 > tbody > :nth-child(1) > .frmedit > .frmedit_icons > .designVarName').contains('_v2')
 
                 })
+
+                it('The system shall support linking to different ontology servers', () => { 
+                    cy.get('[onclick="openAddQuesForm(\'withdraw_reason_v2\',\'select\',0,\'0\');"] > img').click()
+                    cy.get('#field_type').select('Text Box (Short Text, Number, Date/Time, ...)')
+                    cy.get('select#ontology_service_select').should(($val) => {
+                        expect($val).to.contain('BioPortal Ontology Service')
+                    })
+                    cy.get('#ontology_service_select').select('BioPortal Ontology Service')
+                   
+
+
+                })
+
+                 it('The system shall support the creation of new data collection instruments using the Data Dictionary', () => {
+                    cy.visit_version({page: 'ProjectSetup/index.php', params: 'pid=1'})
+                    cy.get('#center').should(($val) => {
+                        expect($val).to.contain('uploading a Data Dictionary')
+                    })
+                    cy.get('[style="line-height:24px;margin-right:30px;"] > .btn').click()
+                    cy.upload_file('import_files/classic_db_instrument.csv', 'csv', 'input[name="uploadedfile"]')
+                    cy.wait(1000)
+                    cy.get('input').contains('Upload File').click()
+                    cy.get('#center').should(($val) => {
+                        expect($val).to.contain('Your document was uploaded successfully and awaits your confirmation below')
+                    })
+
+                  })
         
         })
     })
