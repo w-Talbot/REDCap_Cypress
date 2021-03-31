@@ -1,0 +1,5 @@
+study_id,redcap_data_access_group,first_name,last_name
+1,,John,Doe
+2,,Jane,Doe
+3,,,
+4,new_group_dag,Jack,Doe

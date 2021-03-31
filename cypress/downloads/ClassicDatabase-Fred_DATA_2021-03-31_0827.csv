@@ -1,0 +1,3 @@
+study_id,redcap_data_access_group,date_enrolled,patient_document,first_name,last_name,address,telephone_1,email,dob,age,ethnicity,race,sex,given_birth,num_children,gym___0,gym___1,gym___2,gym___3,gym___4,aerobics___0,aerobics___1,aerobics___2,aerobics___3,aerobics___4,eat___0,eat___1,eat___2,eat___3,eat___4,drink___0,drink___1,drink___2,drink___3,drink___4,specify_mood,meds___1,meds___2,meds___3,meds___4,meds___5,height,weight,bmi,comments,demographics_complete
+1,new_group_dag,,,John,Doe,,,,,,,,,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,,,,0
+2,,,,Jane,Doe,,,,,,,,,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,,,,0

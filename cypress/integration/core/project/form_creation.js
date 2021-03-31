@@ -255,15 +255,15 @@ describe('Design forms Using Data Dictionary and Online Designer', () => {
            
             })
 
-            // it('The system shall support the injection of system defined variables that contain system level information rather than study field data:', () => {
+            it('The system shall support the injection of system defined variables that contain system level information rather than study field data:', () => {
                
                 
-                // cy.get('[onclick="openAddQuesForm(\'address\',\'textarea\',0,\'0\');"] > img').click()
-                // cy.get('#field_annotation').type('@DEFAULT=\'[user-name], [user-dag-name] , [user-dag-id] , [record-name], [record-dag-name] , [record-dag-id],[record-dag-label],[is-form],[form-url:instrument],[form-link:instrument:Custom Text],[is-survey],[survey-url:instrument],urvey-link:instrument:Custom Text],[survey-queue-url],[survey-queue-link:Custom Text],[survey-time-completed:instrument],[survey-date-completed:instrument],[event-name],[event-label],[previous-event-name],[previous-event-label],[next-event-name],[next-event-label],[first-event-name],[first-event-label],[last-event-name],[last-event-label],[arm-number],[arm-label],[previous-instance],[current-instance],[next-instance],[first-instance],[last-instance] \'') 
-                // cy.get('button').contains('Save').click()     
+                cy.get('[onclick="openAddQuesForm(\'address\',\'textarea\',0,\'0\');"] > img').click()
+                cy.get('#field_annotation').type('@DEFAULT=\'[user-name], [user-dag-name] , [user-dag-id] , [record-name], [record-dag-name] , [record-dag-id],[record-dag-label],[is-form],[form-url:instrument],[form-link:instrument:Custom Text],[is-survey],[survey-url:instrument],urvey-link:instrument:Custom Text],[survey-queue-url],[survey-queue-link:Custom Text],[survey-time-completed:instrument],[survey-date-completed:instrument],[event-name],[event-label],[previous-event-name],[previous-event-label],[next-event-name],[next-event-label],[first-event-name],[first-event-label],[last-event-name],[last-event-label],[arm-number],[arm-label],[previous-instance],[current-instance],[next-instance],[first-instance],[last-instance] \'') 
+                cy.get('button').contains('Save').click()     
                 
            
-            // })
+            })
             it('The system shall support the injection of previously collected data / system defined variables into text on a data collection (piping)', () => {
                 
 
