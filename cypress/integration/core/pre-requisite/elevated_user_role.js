@@ -29,13 +29,6 @@ describe('Add / Manage Users', () => {
                                            
                 })
 
-            //if necessary log out and back in to check:
-            //     cy.get('select#new_account_manager').contains('test_user (Test User)').parent().select('test_user (Test User)')
-            //     cy.get('#add_account_manager_btn').click()
-            //     cy.get('.ml-auto > :nth-child(3) > .nav-link').click({force:true})
-            //     cy.get('#username').type('test_user')
-            //     cy.get('#password').type('Testing123')
-            //     cy.get('#login_btn').click()
 			})
 
 

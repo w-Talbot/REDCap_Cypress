@@ -34,11 +34,6 @@ describe('Data Access Groups (DAGs)', () => {
 			cy.visit_version({page: 'DataAccessGroups/index.php', params: 'pid=13'})
 			cy.get('input#new_group').type('t1')
 			cy.get('button#new_group_button').click()
-			
-
-			// cy.get('input#new_group').type('Gr2')
-			// cy.get('button#new_group_button').click()
-
 			cy.wait(1000)
 			cy.visit_version({page: 'DataExport/index.php', params: 'pid=13'})
 			cy.get('button').contains('Export Data').click()

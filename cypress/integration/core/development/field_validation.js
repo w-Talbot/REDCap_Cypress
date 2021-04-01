@@ -114,20 +114,6 @@ describe('Field Validation', () => {
 				})
 			})
 
-			/*
-			it('Should support ranges for a Number field', () => {
-				cy.get('select').contains('Number').parent().select('Number')
-				cy.wait(1000)
-				cy.get('div#div_val_minmax').should(($div) => {
-					expect($div).to.contain('Minimum')
-					expect($div).to.contain('Maximum')
-				})
-			})
-*/
-			//not an option for validation
-			// it('Should support ranges for a Number (1 decimal place – comma as decimal) field', () => {
-
-			// })
 
 			it('Should support ranges for a Time (HH:MM) field', () => {
 				cy.get('select').contains('Time (HH:MM)').parent().select('Time (HH:MM)')

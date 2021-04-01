@@ -3,7 +3,6 @@ describe('Extensions Check', () => {
 	before(() => {
 		cy.set_user_type('admin')
         cy.mysql_db('projects/pristine')
-        // cy.visit_version({page: 'ProjectSetup/index.php', params: "pid=1"})
 
 	})
 
@@ -153,8 +152,6 @@ describe('Extensions Check', () => {
             cy.get('[onclick="window.location.href=app_path_webroot+\'Design/define_events.php?pid=1\';"]').click()
             cy.get('#descrip').type('Test Event')
             cy.get('#addbutton').click()
-
-            // cy.get('#menu-div > .menubox > :nth-child(5) > a').click()
             cy.visit_version({page: 'ProjectSetup/index.php', params: "pid=1"})
 
             //define event
@@ -188,9 +185,7 @@ describe('Extensions Check', () => {
             cy.visit_version({page: 'ProjectSetup/index.php', params: "pid=1"})
             cy.get('table').should(($table) => {
                 expect($table).to.contain('Repeatable instruments and events')
-                // expect($table).to.contain('Scheduling module (longitudinal only)')
                 expect($table).to.contain('Scheduling module')
-                // expect($table).to.contain('Designate an email field for sending survey invitations')    
             })	
 
             })

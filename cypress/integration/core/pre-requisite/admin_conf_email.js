@@ -91,10 +91,6 @@ describe('Notification', () => {
 					cy.get('body').should(($body) => {
 						expect($body).to.contain('Below is a pre-filled confirmation email')
 					})
-
-					//Send the email
-					// cy.get('button.ui-button').contains('Send Email').click()
-
 					
 				})	
 			})

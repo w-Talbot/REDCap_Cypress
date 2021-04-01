@@ -47,10 +47,7 @@ describe('Data Quality', () => {
     })
 
 	it('Should have the ability to view the discrepancies found during rule execution', () => {
-        //cy.get('div#rulename_pd-10').parent().parent().parent().within(($tr) => {
-          //  cy.get('button').contains('Execute').click()
-        //})
-   
+
         cy.get('div#ruleexe_pd-10').within(($d) => {
             cy.get('a').click()
         })
@@ -114,11 +111,6 @@ describe('Data Quality', () => {
                 })
       
                 cy.get('button').contains('Close').click()
-
-
-        
-
-
 
         
     })

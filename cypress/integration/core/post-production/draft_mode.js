@@ -221,16 +221,7 @@ describe('Draft Mode', () => {
 
 				//Save this particular field we are editing
 				cy.save_field()
-
-
-				// cy.get('input[value="Submit Changes for Review"]').should(($i) => {
-				// 	$i.first().click()
-				// })
-
 				cy.get('input[value="Submit Changes for Review"]').click()
-				// cy.get('[style="text-align: center;"] > input').click()
-				//cy.get('button').contains('Save Changes').click()
-
 				//Submit for Appproval
 				cy.get('button').contains('Submit').click()
 				

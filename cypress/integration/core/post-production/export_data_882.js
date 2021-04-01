@@ -3,8 +3,6 @@ const pid = 21
 const admin = 'test_admin'
 const standard = 'test_user'
 
-// Step numbers taken from validation test script 21_ExportDataExtraction_v913.docx
-
 describe('Export Data', () => {
 
     before(() => {
@@ -52,12 +50,10 @@ describe('Export Data', () => {
     describe('Basic Functionality', () => {
 
         before(() => {
-            // Steps 1 (Step 2 not necessary)
             cy.set_user_type('standard')
         })
 
         it('Should have the ability to mark fields as identifiers', () => {
-            // Step 3
             cy.visit_version({page: 'Design/online_designer.php', params: `pid=${pid}&page=export`})
             cy.get('table#design-lname').find('a').first().click()
             cy.get('input#field_phi1').click()
@@ -66,7 +62,6 @@ describe('Export Data', () => {
             cy.get('input#field_phi1').click()
             cy.get('button').contains('Save').click()
         
-            // Step 4
             cy.set_user_type('admin')
             cy.visit_version({page: 'ProjectSetup/index.php', params: `pid=${pid}`})
             cy.get('button').contains('Move project to production').click()
@@ -79,7 +74,6 @@ describe('Export Data', () => {
         it('Should have the ability to export all fields within a project', () => {
 
 
-            // Step 6 - Label Data Export
             cy.visit_version({page: 'DataExport/index.php', params: `pid=${pid}`})
             cy.get('tr#reprow_ALL').find('button.data_export_btn').contains('Export Data').click()
             cy.get('input[value="csvlabels"]').click()
@@ -95,7 +89,6 @@ describe('Export Data', () => {
         })
 
         it('Should allow the ability to export specific forms', () => {
-            // Step 8
             
             cy.visit_version({page: 'DataExport/index.php', params: `pid=${pid}`})
             
@@ -117,7 +110,6 @@ describe('Export Data', () => {
 
     describe('Data Export Formats', () => {
 
-        // Step 5
         before(() => {
             cy.visit_version({page: 'DataExport/index.php', params: `pid=${pid}`})
             cy.get('tr#reprow_ALL').find('button.data_export_btn').contains('Export Data').click()
@@ -157,7 +149,6 @@ describe('Export Data', () => {
         })
 
         describe('Known Identifiers', () => {
-            // Step 9
 
             it('Should have the ability to remove all known identifier fields', () => {
                 cy.get('input[value="csvraw"]').click()
@@ -184,7 +175,6 @@ describe('Export Data', () => {
         })
 
         describe('Free Form Text', () => {
-            // Step 9
 
             it('Should have the ability to remove unvalidated text fields', () => {
                 cy.get('input[value="csvraw"]').click()
@@ -210,7 +200,6 @@ describe('Export Data', () => {
         describe('Date and Datetime Fields', () => {
 
             it('Should have the ability to remove all date and datetime fields', () => {
-                // Step 9
                 cy.get('input[value="csvraw"]').click()
                 cy.get('#deid-dates-remove').check()
                 cy.export_csv_report().should((csv) => {
@@ -220,7 +209,6 @@ describe('Export Data', () => {
             })
 
             it('Should have the ability to shift all dates by value between 0 and 364 days', () => {
-                // Step 10
                 cy.visit_version({page: 'DataExport/index.php', params: `pid=${pid}`})
                 cy.get('tr#reprow_ALL').find('button.data_export_btn').contains('Export Data').click()
                 cy.get('input[value="csvraw"]').click()
@@ -238,7 +226,6 @@ describe('Export Data', () => {
             })
 
             it('Should have the ability to shift all survey completion timestamps by value between 0 and 364 days', () => {
-                // Step 10
                 cy.visit_version({page: 'DataExport/index.php', params: `pid=${pid}`})
                 cy.get('tr#reprow_ALL').find('button.data_export_btn').contains('Export Data').click()
                 cy.get('input[value="csvraw"]').click()
@@ -258,7 +245,6 @@ describe('Export Data', () => {
     describe('Export Permissions', () => {
 
         before(() => {
-            // Step 11
             cy.visit_version({page: 'UserRights/index.php', params: `pid=${pid}`}).then(() => {
                 cy.get(`a.userLinkInTable[userid="${standard}"]`).should('be.visible').click().then(() =>{
                     cy.get('div#tooltipBtnSetCustom').should('be.visible').find('button').click()
@@ -269,7 +255,6 @@ describe('Export Data', () => {
         })
 
         it('Should have the ability to restrict users from exporting data', () => {
-            // Step 12
 
             // To get real data values
             cy.set_user_type('admin')
@@ -303,7 +288,6 @@ describe('Export Data', () => {
                 })
             })
 
-            // Step 13
             cy.visit_version({page: 'UserRights/index.php', params: `pid=${pid}`}).then(() => {
                 cy.get(`a.userLinkInTable[userid="${standard}"]`).should('be.visible').click().then(() =>{
                     cy.get('div#tooltipBtnSetCustom').should('be.visible').find('button').click()
@@ -312,7 +296,6 @@ describe('Export Data', () => {
                 })
             })
 
-            // Step 14
             cy.visit_version({page: 'DataExport/index.php', params: `pid=${pid}`})
             cy.get('tr#reprow_ALL').find('button.data_export_btn').contains('Export Data').should('not.exist')
         })

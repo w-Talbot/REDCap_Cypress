@@ -73,34 +73,6 @@ describe('e-Consent Framework', () => {
         cy.visit_version({page: 'Surveys/invite_participants.php', params: 'pid=1'})
 
 
-
-        // var link = document.querySelector("#longurl");
-    //  cy.visit(link);
-
-//         // cy.get('[style="padding:5px 0px 6px;"] > .btn > .fas').click()
-
-        
-//         // cy.get('[onclick="surveyOpen($(\'#longurl\').val(),0);"]').click()
-        // cy.get('.embed-survey-btn').click()
-
-        // cy.get('#embedurl').then(($temp)=>{
-        //     const txt = $temp.text()
-        // //     const txt = $temp
-
-
-        //     cy.log('Log Here: ')
-        //     cy.log(`${txt}`)
-        //     cy.log(txt)
-        //     cy.pause()
-        //     cy.visit(txt)
-        // })
-
-    
-// // cy.pause()
-        
-        // cy.visit('http://localhost:8882/surveys/?s=H8LK3NF7P4')
-        
-
     })
 
 })

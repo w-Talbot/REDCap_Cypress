@@ -2,10 +2,7 @@ describe('Logging', () => {
 
 	before(() => {
 		cy.mysql_db("projects/pristine")
-		// cy.set_user_type('standard')
 		cy.set_user_type('admin')
-		// cy.visit_version({page: 'Logging/index.php'})
-		// cy.visit_version({page: 'Design/online_designer.php', params: 'pid=1'})
 
 		cy.visit_version({page: 'Design/online_designer.php', params: 'pid=1'})
 		cy.get('body').should(($body) => {
@@ -161,13 +158,6 @@ describe('Logging', () => {
 						expect($val).to.contain('Delete role')
 							
 						}) 
-				
-					
-					// // cy.contains('Delete role').click({force:true})
-					// // cy.get('button').contains('Delete role').click({force:true})
-					
-
-
 		cy.visit_version({page: 'Logging/index.php', params: 'pid=1'})
 		})
 	})

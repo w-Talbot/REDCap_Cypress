@@ -32,13 +32,11 @@ describe('Export Data', () => {
         // Mark records' forms as survey complete
         cy.visit_version({page: 'DataEntry/record_home.php', params: `pid=${pid}&arm=1&id=1`})
         cy.get('div#repeating_forms_table_parent').find('td.data').first().find('a').click()
-       // cy.get('#submit-btn-savecompresp').click({force: true}) //not sure what this was intended to click
-        cy.get('#submit-btn-saverecord').click({force: true}) //possibly savecontinue
+        cy.get('#submit-btn-saverecord').click({force: true}) 
 
         cy.visit_version({page: 'DataEntry/record_home.php', params: `pid=${pid}&arm=1&id=2`})
         cy.get('div#repeating_forms_table_parent').find('td.data').first().find('a').click()
-      //cy.get('#submit-btn-savecompresp').click({force: true}) //not sure what this was intended to click
-        cy.get('#submit-btn-saverecord').click({force: true}) //possibly savecontinue
+        cy.get('#submit-btn-saverecord').click({force: true}) 
 
     })
 

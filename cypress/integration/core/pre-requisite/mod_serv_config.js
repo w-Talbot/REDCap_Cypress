@@ -84,9 +84,6 @@ describe('Module/Services Configuration', () => {
          })
         
         it('Projects can utilise Computer Adaptive Tests ', () => {
-            // cy.visit_version({page: "ControlCenter/index.php"})
-            // cy.get(':nth-child(16) > :nth-child(7) > a').click()
-           
             cy.get('table').should(($table) => {
             expect($table).to.contain('Computer adaptive tests')
                 
@@ -94,7 +91,6 @@ describe('Module/Services Configuration', () => {
          })
          
          it('Projects can use the eConsent Framework ', () => {
-            // cy.visit_version({page: "ControlCenter/index.php"})
             cy.get('table').should(($table) => {
                 expect($table).to.contain('e-Consent')
                     

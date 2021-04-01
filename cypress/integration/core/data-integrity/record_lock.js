@@ -99,9 +99,6 @@ describe('Record Locking and E-Signatures', () => {
 
     })
 
-        
-		// cy.visit_version({page: 'Locking/locking_customization', params: 'pid=1'})
-		// cy.visit_version({page: 'Locking/esign_locking_management', params: 'pid=1'})
 	})
 
 	 describe('Basic Functionality', () => {

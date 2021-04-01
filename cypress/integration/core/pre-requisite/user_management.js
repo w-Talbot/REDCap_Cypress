@@ -122,7 +122,6 @@ describe('Add / Manage Users', () => {
         describe('Assign User Rights', () => {
 
             before(() => {
-				// cy.visit_version({page: 'UserRights/index.php'})
                 cy.visit_version({page: 'UserRights/index.php', params: 'pid=1'})
 
                 cy.get('#new_username').type('test_user')
@@ -331,12 +330,5 @@ describe('Add / Manage Users', () => {
 
     
         })
-
-      
-
-
-
-
-
 
     })

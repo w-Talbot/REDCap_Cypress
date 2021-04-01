@@ -68,10 +68,6 @@ describe('Data Entry through the Survey Feature', () => {
 			})
 
         })
-
-
-    // })
-
     describe('User Interface - Survey Distribution', () => {
         before(() => {
         cy.visit_version({page: 'Design/online_designer.php', params: 'pid=1'})
