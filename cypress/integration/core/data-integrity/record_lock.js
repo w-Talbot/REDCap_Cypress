@@ -159,7 +159,7 @@ describe('Record Locking and E-Signatures', () => {
                 }) 
     	})
 
-    	it('Should have the ability to disable display of the E-Signature option for each Data Colllection instrument', () => {
+    	it('Should have the ability to disable /not display of the E-Signature option for each Data Colllection instrument', () => {
             cy.get('#center').should(($val) => {
                 expect($val).to.contain('Also display E-signature option on instrument?')
                     

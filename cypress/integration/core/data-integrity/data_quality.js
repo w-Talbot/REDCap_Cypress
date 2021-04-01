@@ -117,7 +117,7 @@ describe('Data Quality', () => {
 
     it('Should have the ability to clear discrepancies from executed rules', () => {
             
-        cy.get('#clearBtn').click()
+        cy.get('#clearBtn').click() //clears discrepancies, then checks
         cy.get('#ruleexe_2').should(($val) => {
             //original state after discrepancies are cleared
             expect($val).to.contain('Execute')

@@ -321,7 +321,7 @@ describe('Design forms Using Data Dictionary and Online Designer', () => {
                   })
 
                   it('The system shall support the creation of new data collection instruments via the Online Designer', () => {
-                  //this is proven above, using the Online Designer
+                  //this is proven above
                 })
         
             

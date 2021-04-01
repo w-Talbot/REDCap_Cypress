@@ -65,8 +65,40 @@ describe('Extensions Check', () => {
                     cy.get('[field="text-area"] > .external-modules-input-td > textarea').type('testing')
                     cy.get('button').contains('Save').click()  
 
+
+                
                     
                 })
+
+                it('Make the extension discoverable by all users', () => {
+                   
+                    cy.visit_version({page: "ExternalModules/manager/project.php"})
+
+                    cy.get('.label-info').should(($val) => {
+                        expect($val).to.contain('Discoverable')
+                    })
+
+                })
+
+                it('Extensions can be installed directly in the file system or from the REDCap repository', () => {
+
+                    cy.visit_version({page: "ExternalModules/manager/project.php"})
+
+                    cy.get('#external-modules-download-modules-button').should(($val) => {
+                        expect($val).to.contain('View modules available in the REDCap Repo')
+                    })
+
+                })
+
+                it('Extensions can support project specific settings', () => {
+                    cy.visit_version({page: "ExternalModules/manager/project.php"})
+
+                    cy.get('.external-modules-configure-button').click()
+                    cy.get('#external-modules-configure-modal > .modal-dialog > .modal-content > .modal-body').should(($val) => {
+                        expect($val).to.contain('System Project')
+                    })
+
+                 })
         })
 
              
