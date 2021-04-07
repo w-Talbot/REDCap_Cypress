@@ -153,6 +153,7 @@ describe('Data Quality', () => {
             expect($val).to.contain('group 1')
                 
             })
+        cy.wait(1000)
 
 
            

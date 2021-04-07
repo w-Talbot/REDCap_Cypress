@@ -1,6 +1,8 @@
 describe('Record Locking and E-Signatures', () => {
 
 	before(() => {
+        
+        cy.delete_records(1)
         cy.mysql_db("projects/pristine")
 		cy.set_user_type('admin')
 

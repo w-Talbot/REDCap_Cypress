@@ -1,5 +1,11 @@
 describe('Data Collection and Storage', () => {
 
+
+	before(() => {
+		cy.delete_records(1)
+		cy.mysql_db('projects/pristine')
+	})
+
 	beforeEach(() => {
 		cy.set_user_type('standard')	
 		cy.visit_version({page: 'DataEntry/record_status_dashboard.php', params: "pid=1"})	

@@ -9,6 +9,7 @@ describe('e-Consent Framework', () => {
 
         it('The e-consent framework is available in Survey mode', () => {
             cy.visit_version({page: 'ProjectSetup/index.php', params: 'pid=1'})
+            cy.wait(1000)
             cy.get('#setupEnableSurveysBtn').click()
             
             

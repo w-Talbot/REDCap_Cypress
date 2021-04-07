@@ -2,6 +2,9 @@ describe('Data Entry through the Data Collection Instrument', () => {
     
 
 	before(() => {
+        
+        cy.mysql_db('projects/pristine')
+        cy.delete_records(1)
         cy.set_user_type('standard')
 		
 
@@ -31,7 +34,7 @@ describe('Data Entry through the Data Collection Instrument', () => {
         before(() => {
 
             cy.visit_version({page: 'DataEntry/record_status_dashboard.php', params: "pid=1"})
-			
+			cy.wait(1000)
 
         })
 
